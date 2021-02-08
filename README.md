@@ -1,4 +1,4 @@
-# We Journal
+# Web Journal
 > A place to plan and journal inspired by coursera learning how to learn.
 
 
@@ -28,7 +28,7 @@ jupyter notebook
 !pip install mypy
 ```
 
-Then from the storage_tools project folder
+Then from the web_journal project folder
 ```
 nbdev_build_lib
 mypy web_journal/core.py
