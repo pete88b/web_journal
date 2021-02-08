@@ -1,8 +1,6 @@
 {
-  "storage_tools": {
+  "web_journal": {
     "Overview": "/",
-    "Core": "core.html",
-    "Demo": "demo.html",
-    "CLI": "cli.html"
+    "Core": "core.html"
   }
 }

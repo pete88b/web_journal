@@ -12,13 +12,7 @@ entries:
     - output: web,pdf
       title: Core
       url: core.html
-    - output: web,pdf
-      title: Demo
-      url: demo.html
-    - output: web,pdf
-      title: CLI
-      url: cli.html
     output: web
-    title: storage_tools
+    title: web_journal
   output: web
   title: Sidebar
