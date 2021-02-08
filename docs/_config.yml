@@ -1,7 +1,7 @@
-repository: pete88b/storage_tools
+repository: pete88b/web_journal
 output: web
-topnav_title: storage_tools
-site_title: storage_tools
+topnav_title: web_journal
+site_title: web_journal
 company_name: Peter Butterfill
 description: Make it easy to work with local or cloud storage as part of a data science workflow
 # Set to false to disable KaTeX math

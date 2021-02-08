@@ -2,7 +2,7 @@ topnav:
 - title: Topnav
   items:
     - title: github
-      external_url: https://github.com/pete88b/storage_tools/tree/master/
+      external_url: https://github.com/pete88b/web_journal/tree/main/
 
 #Topnav dropdowns
 topnav_dropdowns:

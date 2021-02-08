@@ -1,10 +1,10 @@
 SRC = $(wildcard ./*.ipynb)
 
-all: storage_tools docs
+all: web_journal docs
 
-storage_tools: $(SRC)
+web_journal: $(SRC)
 	nbdev_build_lib
-	touch storage_tools
+	touch web_journal
 
 sync:
 	nbdev_update_lib
