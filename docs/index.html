@@ -6,8 +6,8 @@ title: Web Journal
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "A place to plan and journal inspired by coursera learning how to learn."
-description: "A place to plan and journal inspired by coursera learning how to learn."
+summary: "A place to plan and journal. Inspired by coursera learning how to learn."
+description: "A place to plan and journal. Inspired by coursera learning how to learn."
 nb_path: "index.ipynb"
 ---
 <!--
@@ -54,6 +54,17 @@ cd github *** nav to where you want this project to live on your filesystem
 git clone https://github.com/pete88b/web_journal.git
 nbdev_install_git_hooks
 jupyter notebook</code></pre>
+<p>TODO: see settings.ini dev_requirements</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Running-the-app-locally">Running the app locally<a class="anchor-link" href="#Running-the-app-locally"> </a></h2>
+<pre><code>SET FLASK_APP=web_journal.web.app
+SET FLASK_ENV=development
+flask run</code></pre>
 
 </div>
 </div>
@@ -66,7 +77,6 @@ jupyter notebook</code></pre>
 
 <pre><code>nbdev_build_lib
 mypy web_journal/core.py</code></pre>
-<p>For now, I'm ignoring the "Skipping analyzing 'azure': found module but no type hints or library stubs" error</p>
 
 </div>
 </div>

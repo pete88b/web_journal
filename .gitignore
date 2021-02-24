@@ -144,3 +144,6 @@ checklink/cookies.txt
 secrets/
 .data/
 data/
+
+# keep azure config out of github for now
+.azure

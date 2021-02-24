@@ -1,5 +1,5 @@
 # Web Journal
-> A place to plan and journal inspired by coursera learning how to learn.
+> A place to plan and journal. Inspired by coursera learning how to learn.
 
 
 ## Install
@@ -22,6 +22,16 @@ nbdev_install_git_hooks
 jupyter notebook
 ```
 
+TODO: see settings.ini dev_requirements
+
+## Running the app locally
+
+```
+SET FLASK_APP=web_journal.web.app
+SET FLASK_ENV=development
+flask run
+```
+
 ## Type checking with mypy
 
 ```
@@ -33,5 +43,3 @@ Then from the web_journal project folder
 nbdev_build_lib
 mypy web_journal/core.py
 ```
-
-For now, I'm ignoring the "Skipping analyzing 'azure': found module but no type hints or library stubs" error

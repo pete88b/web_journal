@@ -12,6 +12,18 @@ entries:
     - output: web,pdf
       title: Core
       url: core.html
+    - output: web,pdf
+      title: Web App
+      url: web_app.html
+    - output: web,pdf
+      title: Web Db
+      url: web_db.html
+    - output: web,pdf
+      title: Web Auth
+      url: web_auth.html
+    - output: web,pdf
+      title: Web Blog
+      url: web_blog.html
     output: web
     title: web_journal
   output: web

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Entries{% endblock %}
+
+{% block content %}
+  <form action="{{ url_for('blog.create') }}" method="post">
+    <input name="title" id="new-post-title" value="{{ request.form['title'] }}" required
+           placeholder="Start with a title to create a new entry" autofocus>
+    <textarea name="body" id="new-post-body" style="display:none">{{ request.form['body'] }}</textarea>
+    <input type="submit" id="new-post-save" value="Save" class="main-submit" style="display:none">
+  </form>
+  {% for post in posts %}
+    <hr>
+    <article class="post">
+      <header>
+        <div>
+          <h1><a href="{{ url_for('blog.update', id=post['id']) }}" title="Click to edit this entry">{{ post['title'] }}</a></h1>
+          <div class="about">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</div>
+        </div>
+        {# {% if g.user['id'] == post['author_id'] %}
+          <a class="action" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
+        {% endif %} #}
+      </header>
+      <p class="body">{{ post['body'] }}</p>
+    </article>
+    {# {% if not loop.last %}
+      <hr>
+    {% endif %} #}
+  {% endfor %}
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+{% endblock %}

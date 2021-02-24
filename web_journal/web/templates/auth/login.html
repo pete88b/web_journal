@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Log In{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="username">Username</label>
+    <input name="username" id="username" required autofocus>
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required>
+    <div>
+      <input type="submit" name="login" value="Log In" class="main-submit">
+      <input type="submit" name="register" value="... or Register">
+    </div>
+  </form>
+{% endblock %}

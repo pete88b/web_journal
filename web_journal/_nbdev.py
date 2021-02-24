@@ -2,9 +2,27 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {}
+index = {"create_app": "50_web_app.ipynb",
+         "get_db": "50a_web_db.ipynb",
+         "close_db": "50a_web_db.ipynb",
+         "init_db": "50a_web_db.ipynb",
+         "init_db_command": "50a_web_db.ipynb",
+         "init_app": "50a_web_db.ipynb",
+         "login_required": "50b_web_auth.ipynb",
+         "load_logged_in_user": "50b_web_auth.ipynb",
+         "bp": "50c_web_blog.ipynb",
+         "login": "50b_web_auth.ipynb",
+         "logout": "50b_web_auth.ipynb",
+         "index": "50c_web_blog.ipynb",
+         "get_post": "50c_web_blog.ipynb",
+         "create": "50c_web_blog.ipynb",
+         "update": "50c_web_blog.ipynb",
+         "delete": "50c_web_blog.ipynb"}
 
-modules = []
+modules = ["web/app.py",
+           "web/db.py",
+           "web/auth.py",
+           "web/blog.py"]
 
 doc_url = "https://pete88b.github.io/web_journal/"
 
