@@ -13,7 +13,6 @@ from flask import url_for
 from werkzeug.exceptions import abort
 
 from .auth import login_required
-from .db import get_db
 
 bp = Blueprint("blog", __name__)
 
@@ -24,15 +23,7 @@ def index():
     """Show all the posts, most recent first."""
     posts = []
     if g.user is not None:
-        db = get_db()
-        posts = db.execute(
-            "SELECT p.id, title, body, created, author_id, username"
-            "  FROM post p JOIN user u ON p.author_id = u.id"
-            " WHERE u.id = ?"
-            "   AND p.is_deleted = 0"
-            " ORDER BY created DESC",
-            (g.user["id"],)
-        ).fetchall()
+        posts = g.service.read_posts_by_author_id(g.user["id"])
     return render_template("blog/index.html", posts=posts)
 
 
@@ -46,21 +37,13 @@ def get_post(id, check_author=True):
     :raise 404: if a post with the given id doesn't exist
     :raise 403: if the current user isn't the author
     """
-    post = (
-        get_db()
-        .execute(
-            "SELECT p.id, title, body, created, author_id, username"
-            " FROM post p JOIN user u ON p.author_id = u.id"
-            " WHERE p.id = ?",
-            (id,),
-        )
-        .fetchone()
-    )
+    post = g.service.read_post_by_id(g.user["id"],id)
 
     if post is None:
         abort(404, "Post id {0} doesn't exist.".format(id))
 
     if check_author and post["author_id"] != g.user["id"]:
+        # TODO: this is no longer relevant
         abort(403)
 
     return post
@@ -81,12 +64,7 @@ def create():
         if error is not None:
             flash(error)
         else:
-            db = get_db()
-            db.execute(
-                "INSERT INTO post (title, body, author_id) VALUES (?, ?, ?)",
-                (title, body, g.user["id"]),
-            )
-            db.commit()
+            g.service.create_post(g.user["id"],title,body)
             return redirect(url_for("blog.index"))
 
     return render_template("blog/create.html")
@@ -109,11 +87,7 @@ def update(id):
         if error is not None:
             flash(error)
         else:
-            db = get_db()
-            db.execute(
-                "UPDATE post SET title = ?, body = ? WHERE id = ?", (title, body, id)
-            )
-            db.commit()
+            g.service.update_post_by_id(g.user["id"],id,title,body)
             return redirect(url_for("blog.index"))
 
     return render_template("blog/update.html", post=post)
@@ -127,8 +101,5 @@ def delete(id):
     author of the post.
     """
     get_post(id)
-    db = get_db()
-#     db.execute("DELETE FROM post WHERE id = ?", (id,))
-    db.execute("UPDATE post SET is_deleted = 1 WHERE id = ?", (id,))
-    db.commit()
+    g.service.delete_post_by_id(g.user["id"],id)
     return redirect(url_for("blog.index"))

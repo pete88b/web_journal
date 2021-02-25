@@ -2,12 +2,13 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"create_app": "50_web_app.ipynb",
-         "get_db": "50a_web_db.ipynb",
-         "close_db": "50a_web_db.ipynb",
-         "init_db": "50a_web_db.ipynb",
-         "init_db_command": "50a_web_db.ipynb",
-         "init_app": "50a_web_db.ipynb",
+index = {"SCHEMA_SQL": "40a_service_db.ipynb",
+         "ServiceDb": "40a_service_db.ipynb",
+         "before_request": "40b_service_filesystem.ipynb",
+         "after_request": "40b_service_filesystem.ipynb",
+         "init_service": "40b_service_filesystem.ipynb",
+         "ServiceFilesystem": "40b_service_filesystem.ipynb",
+         "create_app": "50_web_app.ipynb",
          "login_required": "50b_web_auth.ipynb",
          "load_logged_in_user": "50b_web_auth.ipynb",
          "bp": "50c_web_blog.ipynb",
@@ -19,8 +20,9 @@ index = {"create_app": "50_web_app.ipynb",
          "update": "50c_web_blog.ipynb",
          "delete": "50c_web_blog.ipynb"}
 
-modules = ["web/app.py",
-           "web/db.py",
+modules = ["service/db.py",
+           "service/filesystem.py",
+           "web/app.py",
            "web/auth.py",
            "web/blog.py"]
 

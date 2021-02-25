@@ -2,8 +2,9 @@
   "web_journal": {
     "Overview": "/",
     "Core": "core.html",
+    "Service Db": "service_db.html",
+    "Service Filesystem": "service_filesystem.html",
     "Web App": "web_app.html",
-    "Web Db": "web_db.html",
     "Web Auth": "web_auth.html",
     "Web Blog": "web_blog.html"
   }

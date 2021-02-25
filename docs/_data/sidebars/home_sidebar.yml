@@ -13,11 +13,14 @@ entries:
       title: Core
       url: core.html
     - output: web,pdf
+      title: Service Db
+      url: service_db.html
+    - output: web,pdf
+      title: Service Filesystem
+      url: service_filesystem.html
+    - output: web,pdf
       title: Web App
       url: web_app.html
-    - output: web,pdf
-      title: Web Db
-      url: web_db.html
     - output: web,pdf
       title: Web Auth
       url: web_auth.html

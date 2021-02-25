@@ -145,5 +145,9 @@ secrets/
 .data/
 data/
 
+# keep web app instance data out of github
+.instance/
+instance/
+
 # keep azure config out of github for now
 .azure

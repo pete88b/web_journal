@@ -4,7 +4,7 @@ __all__ = ['create_app']
 
 # Cell
 import os
-from flask import Flask
+from flask import Flask, g
 from pathlib import Path
 
 # Cell
@@ -14,8 +14,7 @@ def create_app(test_config=None):
     app.config.from_mapping(
         # a default secret that should be overridden by instance config
         SECRET_KEY="dev",
-        # store the database in the instance folder
-        DATABASE=os.path.join(app.instance_path, "web_journal.sqlite"),
+        DATA_DIR=app.instance_path, # used by filesystem and DB service
     )
 
     if test_config is None:
@@ -26,14 +25,27 @@ def create_app(test_config=None):
         app.config.update(test_config)
 
     # ensure the instance folder exists
-    os.makedirs(app.instance_path, exist_ok=True)
+    os.makedirs(app.config['DATA_DIR'], exist_ok=True)
 
     @app.route("/hello")
     def hello(): return "Hello, World!"
 
-    from . import db, auth, blog
-    # register the database commands
-    db.init_app(app)
+    # TODO: make the service module inport configurable
+    import web_journal.service.filesystem as service_module
+#     import web_journal.service.db as service_module
+
+    service_module.init_service(app)
+
+    @app.before_request
+    def before_request():
+        g.service=service_module.before_request(app)
+
+    @app.after_request
+    def after_request(response):
+        service_module.after_request(app,g.service)
+        return response
+
+    from . import auth, blog
     # apply the blueprints to the app
     app.register_blueprint(auth.bp)
     app.register_blueprint(blog.bp)
