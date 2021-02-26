@@ -72,7 +72,7 @@ nb_path: "50b_web_auth.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="load_logged_in_user" class="doc_header"><code>load_logged_in_user</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/web/auth.py#L32" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_logged_in_user</code>()</p>
+<h4 id="load_logged_in_user" class="doc_header"><code>load_logged_in_user</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/web/auth.py#L31" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_logged_in_user</code>()</p>
 </blockquote>
 <p>If a user id is stored in the session, load the user object from
 the database into <code>g.user</code>.</p>
@@ -97,92 +97,6 @@ the database into <code>g.user</code>.</p>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># def register():</span>
-<span class="c1">#     &quot;&quot;&quot;Register a new user.</span>
-<span class="c1">#     Validates that the username is not already taken. Hashes the</span>
-<span class="c1">#     password for security.</span>
-<span class="c1">#     &quot;&quot;&quot;</span>
-<span class="c1">#     if request.method == &quot;POST&quot;:</span>
-<span class="c1">#         username = request.form[&quot;username&quot;]</span>
-<span class="c1">#         password = request.form[&quot;password&quot;]</span>
-<span class="c1">#         db = get_db()</span>
-<span class="c1">#         error = None</span>
-
-<span class="c1">#         if not username:</span>
-<span class="c1">#             error = &quot;Username is required.&quot;</span>
-<span class="c1">#         elif not password:</span>
-<span class="c1">#             error = &quot;Password is required.&quot;</span>
-<span class="c1">#         elif (</span>
-<span class="c1">#             db.execute(&quot;SELECT id FROM user WHERE username = ?&quot;, (username,)).fetchone()</span>
-<span class="c1">#             is not None</span>
-<span class="c1">#         ):</span>
-<span class="c1">#             error = &quot;User {0} is already registered.&quot;.format(username)</span>
-
-<span class="c1">#         if error is None:</span>
-<span class="c1">#             # the name is available, store it in the database and ...</span>
-<span class="c1">#             db.execute(</span>
-<span class="c1">#                 &quot;INSERT INTO user (username, password) VALUES (?, ?)&quot;,</span>
-<span class="c1">#                 (username, generate_password_hash(password)),</span>
-<span class="c1">#             )</span>
-<span class="c1">#             db.commit()</span>
-<span class="c1">#             # store the user id in a new session and return to the index</span>
-<span class="c1">#             session.clear()</span>
-<span class="c1">#             user = db.execute(</span>
-<span class="c1">#                 &quot;SELECT * FROM user WHERE username = ?&quot;, (username,)</span>
-<span class="c1">#             ).fetchone()</span>
-<span class="c1">#             session[&quot;user_id&quot;] = user[&quot;id&quot;]</span>
-<span class="c1">#             return redirect(url_for(&quot;index&quot;))</span>
-
-<span class="c1">#         flash(error)</span>
-
-<span class="c1">#     return render_template(&quot;auth/register.html&quot;)</span>
-
-
-<span class="c1"># @bp.route(&quot;/login&quot;, methods=(&quot;GET&quot;, &quot;POST&quot;))</span>
-<span class="c1"># def login():</span>
-<span class="c1">#     &quot;&quot;&quot;Log in a registered user by adding the user id to the session.&quot;&quot;&quot;</span>
-<span class="c1">#     print(&#39;login&#39; in request.form)</span>
-<span class="c1">#     print(request.method)</span>
-<span class="c1">#     print(request.form)</span>
-<span class="c1">#     if request.method == &quot;POST&quot;:</span>
-<span class="c1">#         username = request.form[&quot;username&quot;]</span>
-<span class="c1">#         password = request.form[&quot;password&quot;]</span>
-<span class="c1">#         db = get_db()</span>
-<span class="c1">#         error = None</span>
-<span class="c1">#         user = db.execute(</span>
-<span class="c1">#             &quot;SELECT * FROM user WHERE username = ?&quot;, (username,)</span>
-<span class="c1">#         ).fetchone()</span>
-
-<span class="c1">#         if user is None:</span>
-<span class="c1">#             error = &quot;Incorrect username.&quot;</span>
-<span class="c1">#         elif not check_password_hash(user[&quot;password&quot;], password):</span>
-<span class="c1">#             error = &quot;Incorrect password.&quot;</span>
-
-<span class="c1">#         if error is None:</span>
-<span class="c1">#             # store the user id in a new session and return to the index</span>
-<span class="c1">#             session.clear()</span>
-<span class="c1">#             session[&quot;user_id&quot;] = user[&quot;id&quot;]</span>
-<span class="c1">#             return redirect(url_for(&quot;index&quot;))</span>
-
-<span class="c1">#         flash(error)</span>
-
-<span class="c1">#     return render_template(&quot;auth/login.html&quot;)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
 <div class="output">
@@ -191,7 +105,7 @@ the database into <code>g.user</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="login" class="doc_header"><code>login</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/web/auth.py#L44" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>login</code>()</p>
+<h4 id="login" class="doc_header"><code>login</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/web/auth.py#L43" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>login</code>()</p>
 </blockquote>
 <p>Log in a registered user by adding the user id to the session.</p>
 
@@ -223,7 +137,7 @@ the database into <code>g.user</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="logout" class="doc_header"><code>logout</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/web/auth.py#L81" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>logout</code>()</p>
+<h4 id="logout" class="doc_header"><code>logout</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/web/auth.py#L83" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>logout</code>()</p>
 </blockquote>
 <p>Clear the current session, including the stored user id.</p>
 

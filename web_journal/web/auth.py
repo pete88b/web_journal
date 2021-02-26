@@ -7,7 +7,7 @@ import functools
 
 from flask import Blueprint
 from flask import flash
-from flask import g
+from flask import g, current_app
 from flask import redirect
 from flask import render_template
 from flask import request
@@ -21,7 +21,6 @@ bp = Blueprint("auth", __name__, url_prefix="/auth")
 
 def login_required(view):
     """View decorator that redirects anonymous users to the login page."""
-
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user is None:
@@ -58,6 +57,9 @@ def login():
             elif not check_password_hash(user["password"], password):
                 error = "Incorrect password."
         elif 'register' in request.form:
+            if 'USERNAME_SUFFIX' in current_app.config:
+                if not username.endswith(current_app.config['USERNAME_SUFFIX']):
+                    error = f"Sorry, registration is restricted."
             if user:
                 error = f"User {username} is already registered."
         else:

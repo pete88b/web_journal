@@ -15,6 +15,7 @@ def create_app(test_config=None):
         # a default secret that should be overridden by instance config
         SECRET_KEY="dev",
         DATA_DIR=app.instance_path, # used by filesystem and DB service
+#         USERNAME_SUFFIX='whatever' # Don't set username suffix by default
     )
 
     if test_config is None:
