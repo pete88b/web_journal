@@ -18,7 +18,8 @@ index = {"SCHEMA_SQL": "40a_service_db.ipynb",
          "get_post": "50c_web_blog.ipynb",
          "create": "50c_web_blog.ipynb",
          "update": "50c_web_blog.ipynb",
-         "delete": "50c_web_blog.ipynb"}
+         "delete": "50c_web_blog.ipynb",
+         "download": "50c_web_blog.ipynb"}
 
 modules = ["service/db.py",
            "service/filesystem.py",

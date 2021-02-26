@@ -87,6 +87,11 @@ class ServiceFilesystem:
                         return post
         return None
 
+    def prepare_posts_file_by_author_id(self,author_id):
+        if (self.data_dir/f'posts-{author_id}.json').is_file():
+            return self.data_dir,f'posts-{author_id}.json'
+        return None,None
+
 # Cell
 def before_request(app):
     return ServiceFilesystem(app.config['DATA_DIR'])

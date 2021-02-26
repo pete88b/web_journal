@@ -28,5 +28,9 @@
       <hr>
     {% endif %} #}
   {% endfor %}
+  <hr>
+  <div class="content-right">
+    <a href="{{ url_for('blog.download') }}" title="Click to download all posts">Download Posts</a>
+  </div>
   <script src="{{ url_for('static', filename='main.js') }}"></script>
 {% endblock %}

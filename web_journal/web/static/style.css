@@ -144,3 +144,12 @@ input[type=submit].main-submit {
 h1.main-nav-header > a {
   color: grey;
 }
+
+div.content-right {
+  display: flex; 
+  justify-content: flex-end;
+}
+
+a {
+  cursor: pointer;
+}

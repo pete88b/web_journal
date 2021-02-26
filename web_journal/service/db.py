@@ -96,6 +96,10 @@ class ServiceDb:
         self.db.execute("UPDATE post SET is_deleted = 1 WHERE id = ?", (id,))
         self.db.commit()
 
+    def prepare_posts_file_by_author_id(self,author_id):
+        # TODO: implement for DB service
+        return None,None
+
 # Cell
 def before_request(app):
     return ServiceDb(Path(app.config['DATA_DIR'])/'web_journal.sqlite')
