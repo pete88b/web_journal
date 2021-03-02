@@ -12,6 +12,8 @@ from flask import request
 from flask import url_for
 from flask import send_from_directory
 from werkzeug.exceptions import abort
+import markdown
+import markdown.extensions.fenced_code
 
 from .auth import login_required
 
@@ -25,6 +27,8 @@ def index():
     posts = []
     if g.user is not None:
         posts = g.service.read_posts_by_author_id(g.user["id"])
+    for post in posts: # TODO: move this to blog index template
+        post['body']=markdown.markdown(post['body'], extensions=['fenced_code'])
     return render_template("blog/index.html", posts=posts)
 
 # Cell
