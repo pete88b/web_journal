@@ -7,6 +7,7 @@ index = {"SCHEMA_SQL": "40a_service_db.ipynb",
          "before_request": "40b_service_filesystem.ipynb",
          "after_request": "40b_service_filesystem.ipynb",
          "init_service": "40b_service_filesystem.ipynb",
+         "posts_list_to_dict": "40b_service_filesystem.ipynb",
          "ServiceFilesystem": "40b_service_filesystem.ipynb",
          "create_app": "50_web_app.ipynb",
          "login_required": "50b_web_auth.ipynb",
@@ -19,7 +20,8 @@ index = {"SCHEMA_SQL": "40a_service_db.ipynb",
          "create": "50c_web_blog.ipynb",
          "update": "50c_web_blog.ipynb",
          "delete": "50c_web_blog.ipynb",
-         "download": "50c_web_blog.ipynb"}
+         "download": "50c_web_blog.ipynb",
+         "upload": "50c_web_blog.ipynb"}
 
 modules = ["service/db.py",
            "service/filesystem.py",

@@ -64,7 +64,58 @@ nb_path: "40b_service_filesystem.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ServiceFilesystem" class="doc_header"><code>class</code> <code>ServiceFilesystem</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L10" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ServiceFilesystem</code>(<strong><code>data_dir</code></strong>)</p>
+<h4 id="posts_list_to_dict" class="doc_header"><code>posts_list_to_dict</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L10" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>posts_list_to_dict</code>(<strong><code>posts</code></strong>, <strong><code>key</code></strong>=<em><code>'id'</code></em>)</p>
+</blockquote>
+<p>Convert a list of dictionaries to a dictionary of dictionaries</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">posts</span><span class="o">=</span><span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">),</span><span class="nb">dict</span><span class="p">(</span><span class="nb">id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">)]</span>
+<span class="n">expected</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="n">posts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">posts</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span>
+<span class="k">assert</span> <span class="n">expected</span><span class="o">==</span><span class="n">posts_list_to_dict</span><span class="p">(</span><span class="n">posts</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="ServiceFilesystem" class="doc_header"><code>class</code> <code>ServiceFilesystem</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L15" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ServiceFilesystem</code>(<strong><code>data_dir</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -80,6 +131,29 @@ nb_path: "40b_service_filesystem.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">temp_path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">service</span><span class="o">=</span><span class="n">ServiceFilesystem</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+    <span class="n">post</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">_add_username</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">author_id</span><span class="o">=</span><span class="mi">123</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="s1">&#39;Unknown user&#39;</span><span class="o">==</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 </div>
     {% endraw %}
@@ -133,7 +207,17 @@ nb_path: "40b_service_filesystem.ipynb"
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="nb">str</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">filename</span><span class="o">==</span><span class="sa">f</span><span class="s1">&#39;posts-</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s1">.json&#39;</span>
     <span class="k">assert</span> <span class="p">(</span><span class="n">directory</span><span class="o">/</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span>
-    
+    <span class="c1"># test upload</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">directory</span><span class="o">/</span><span class="n">filename</span><span class="p">,</span><span class="n">directory</span><span class="o">/</span><span class="s1">&#39;posts2upload&#39;</span><span class="p">)</span>
+    <span class="n">posts</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">read_posts_by_author_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="n">service</span><span class="o">.</span><span class="n">upload_posts_from_file</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">directory</span><span class="o">/</span><span class="s1">&#39;posts2upload&#39;</span><span class="p">)</span> <span class="c1"># makes no difference</span>
+    <span class="k">assert</span> <span class="n">posts</span><span class="o">==</span><span class="n">service</span><span class="o">.</span><span class="n">read_posts_by_author_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">service</span><span class="o">.</span><span class="n">delete_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">posts</span><span class="p">]</span>
+    <span class="n">service</span><span class="o">.</span><span class="n">upload_posts_from_file</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">directory</span><span class="o">/</span><span class="s1">&#39;posts2upload&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="p">[]</span><span class="o">==</span><span class="n">service</span><span class="o">.</span><span class="n">read_posts_by_author_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span> <span class="c1"># they are all still deleted</span>
+    <span class="p">(</span><span class="n">directory</span><span class="o">/</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+    <span class="n">service</span><span class="o">.</span><span class="n">upload_posts_from_file</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">directory</span><span class="o">/</span><span class="s1">&#39;posts2upload&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">posts</span><span class="o">==</span><span class="n">service</span><span class="o">.</span><span class="n">read_posts_by_author_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
 <span class="k">finally</span><span class="p">:</span>
     <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
 </pre></div>
@@ -156,7 +240,7 @@ nb_path: "40b_service_filesystem.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="before_request" class="doc_header"><code>before_request</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L96" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>before_request</code>(<strong><code>app</code></strong>)</p>
+<h4 id="before_request" class="doc_header"><code>before_request</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L111" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>before_request</code>(<strong><code>app</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -187,7 +271,7 @@ nb_path: "40b_service_filesystem.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="after_request" class="doc_header"><code>after_request</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L100" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>after_request</code>(<strong><code>app</code></strong>, <strong><code>service</code></strong>)</p>
+<h4 id="after_request" class="doc_header"><code>after_request</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L115" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>after_request</code>(<strong><code>app</code></strong>, <strong><code>service</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -218,7 +302,7 @@ nb_path: "40b_service_filesystem.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="init_service" class="doc_header"><code>init_service</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L104" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>init_service</code>(<strong><code>app</code></strong>)</p>
+<h4 id="init_service" class="doc_header"><code>init_service</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L119" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>init_service</code>(<strong><code>app</code></strong>)</p>
 </blockquote>
 
 </div>
