@@ -109,7 +109,7 @@ def delete(id):
     author of the post.
     """
     get_post(id)
-    g.service.delete_post_by_id(g.user["id"],id)
+    g.service.update_post_by_id(g.user["id"],id,['status'],[20])
     return redirect(url_for("blog.index"))
 
 # Cell
