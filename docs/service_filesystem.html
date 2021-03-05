@@ -115,7 +115,7 @@ nb_path: "40b_service_filesystem.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ServiceFilesystem" class="doc_header"><code>class</code> <code>ServiceFilesystem</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L15" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ServiceFilesystem</code>(<strong><code>data_dir</code></strong>)</p>
+<h4 id="migrate" class="doc_header"><code>migrate</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L15" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>migrate</code>(<strong><code>data_dir</code></strong>, <strong><code>output_dir</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -131,6 +131,117 @@ nb_path: "40b_service_filesystem.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">temp_path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">migrate</span><span class="p">(</span><span class="s1">&#39;test/original-format&#39;</span><span class="p">,</span><span class="n">temp_path</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span><span class="o">/</span><span class="s1">&#39;posts-1614707380557.json&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> <span class="n">posts</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">posts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1614810438150</span><span class="p">,</span>
+        <span class="s2">&quot;author_id&quot;</span><span class="p">:</span> <span class="mi">1614707380557</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;plan: same as yesterday :-(&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-03-03 22:27:18&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;last_updated&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-03-03 22:27:18&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">}</span>
+    <span class="k">assert</span> <span class="n">posts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">==</span><span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1614276006392</span><span class="p">,</span>
+        <span class="s2">&quot;author_id&quot;</span><span class="p">:</span> <span class="mi">1614707380557</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;tt&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="s2">&quot;130&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-02-25 18:00:06&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;last_updated&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-02-25 18:00:06&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">}</span>
+    
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>migrating test\original-format\posts-1614707380557.json to C:\Users\Butterp\AppData\Local\Temp\tmpct1r7nae
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="ServiceFilesystem" class="doc_header"><code>class</code> <code>ServiceFilesystem</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L34" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ServiceFilesystem</code>(<strong><code>data_dir</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">temp_path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">service</span><span class="o">=</span><span class="n">ServiceFilesystem</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">service</span><span class="o">.</span><span class="n">read_user_by_id</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+    <span class="k">assert</span> <span class="n">service</span><span class="o">.</span><span class="n">read_user_by_username</span><span class="p">(</span><span class="s1">&#39;test.user&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+    <span class="n">user_id</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="s1">&#39;test.user&#39;</span><span class="p">,</span><span class="s1">&#39;badPassword&#39;</span><span class="p">)</span>
+    <span class="n">expected_user</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">user_id</span><span class="p">,</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;test.user&#39;</span><span class="p">,</span><span class="n">password</span><span class="o">=</span><span class="s1">&#39;badPassword&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">service</span><span class="o">.</span><span class="n">read_user_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span><span class="o">==</span><span class="n">expected_user</span>
+    <span class="k">assert</span> <span class="n">service</span><span class="o">.</span><span class="n">read_user_by_username</span><span class="p">(</span><span class="s1">&#39;test.user&#39;</span><span class="p">)</span><span class="o">==</span><span class="n">expected_user</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 </div>
     {% endraw %}
@@ -168,18 +279,26 @@ nb_path: "40b_service_filesystem.ipynb"
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">_compare_post</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span><span class="n">actal</span><span class="p">):</span>
     <span class="s2">&quot;Check values match for all keys in `expected`, which might not be all keys in `actual`&quot;</span>
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">expected</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="k">assert</span> <span class="n">expected</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">==</span><span class="n">actal</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+</pre></div>
 
-<span class="n">temp_path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">temp_path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">service</span><span class="o">=</span><span class="n">ServiceFilesystem</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
-    <span class="c1"># user section</span>
-    <span class="k">assert</span> <span class="n">service</span><span class="o">.</span><span class="n">read_user_by_id</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
-    <span class="k">assert</span> <span class="n">service</span><span class="o">.</span><span class="n">read_user_by_username</span><span class="p">(</span><span class="s1">&#39;test.user&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
     <span class="n">user_id</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="s1">&#39;test.user&#39;</span><span class="p">,</span><span class="s1">&#39;badPassword&#39;</span><span class="p">)</span>
-    <span class="n">expected_user</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">user_id</span><span class="p">,</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;test.user&#39;</span><span class="p">,</span><span class="n">password</span><span class="o">=</span><span class="s1">&#39;badPassword&#39;</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">service</span><span class="o">.</span><span class="n">read_user_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span><span class="o">==</span><span class="n">expected_user</span>
-    <span class="k">assert</span> <span class="n">service</span><span class="o">.</span><span class="n">read_user_by_username</span><span class="p">(</span><span class="s1">&#39;test.user&#39;</span><span class="p">)</span><span class="o">==</span><span class="n">expected_user</span>
-    <span class="c1"># post section</span>
     <span class="k">assert</span> <span class="n">service</span><span class="o">.</span><span class="n">read_posts_by_author_id</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span><span class="o">==</span><span class="p">[]</span>
     <span class="k">assert</span> <span class="n">service</span><span class="o">.</span><span class="n">read_posts_by_author_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span><span class="o">==</span><span class="p">[]</span>
     <span class="k">assert</span> <span class="n">service</span><span class="o">.</span><span class="n">read_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="mi">123</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
@@ -187,37 +306,131 @@ nb_path: "40b_service_filesystem.ipynb"
     <span class="n">post_id</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">service</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;title</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">2&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">)</span>
     <span class="c1"># don&#39;t add created to `expected_post` as we don&#39;t know what it&#39;s value will be</span>
-    <span class="n">expected_post</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">post_id</span><span class="p">,</span><span class="n">author_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="n">body</span><span class="o">=</span><span class="s1">&#39;body&#39;</span><span class="p">,</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;test.user&#39;</span><span class="p">,</span><span class="n">is_deleted</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">expected_post</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">post_id</span><span class="p">,</span><span class="n">author_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="n">body</span><span class="o">=</span><span class="s1">&#39;body&#39;</span><span class="p">,</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;test.user&#39;</span><span class="p">,</span><span class="n">status</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
     <span class="n">posts</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">read_posts_by_author_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">posts</span><span class="p">)</span><span class="o">==</span><span class="mi">7</span>
     <span class="n">_compare_post</span><span class="p">(</span><span class="n">expected_post</span><span class="p">,</span><span class="n">posts</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">posts</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="s1">&#39;created&#39;</span><span class="p">],</span><span class="nb">str</span><span class="p">)</span>
     <span class="n">post</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">read_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">post</span><span class="o">==</span><span class="n">posts</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-    <span class="k">assert</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;is_deleted&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span>
-    <span class="k">assert</span> <span class="n">post</span><span class="o">!=</span><span class="n">service</span><span class="o">.</span><span class="n">delete_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">)</span>
-    <span class="n">expected_post</span><span class="p">[</span><span class="s1">&#39;is_deleted&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
-    <span class="c1"># deleted posts are readable by ID ...</span>
-    <span class="n">_compare_post</span><span class="p">(</span><span class="n">expected_post</span><span class="p">,</span><span class="n">service</span><span class="o">.</span><span class="n">read_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">))</span>
-    <span class="c1"># but are not returned when reading all posts by author</span>
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">service</span><span class="o">.</span><span class="n">read_posts_by_author_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">))</span><span class="o">==</span><span class="mi">6</span>
+    <span class="k">assert</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">50</span>
+    <span class="k">assert</span> <span class="n">post</span><span class="o">!=</span><span class="n">service</span><span class="o">.</span><span class="n">update_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">,[</span><span class="s1">&#39;status&#39;</span><span class="p">],[</span><span class="mi">20</span><span class="p">])</span>
     <span class="c1"># test prep download</span>
     <span class="n">directory</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">prepare_posts_file_by_author_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span><span class="n">Path</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="nb">str</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">filename</span><span class="o">==</span><span class="sa">f</span><span class="s1">&#39;posts-</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s1">.json&#39;</span>
     <span class="k">assert</span> <span class="p">(</span><span class="n">directory</span><span class="o">/</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span>
-    <span class="c1"># test upload</span>
-    <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">directory</span><span class="o">/</span><span class="n">filename</span><span class="p">,</span><span class="n">directory</span><span class="o">/</span><span class="s1">&#39;posts2upload&#39;</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">temp_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">())</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">service</span><span class="o">=</span><span class="n">ServiceFilesystem</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+    <span class="n">user_id</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="s1">&#39;test.user&#39;</span><span class="p">,</span><span class="s1">&#39;badPassword&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">service</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;title</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">)</span>
+    <span class="n">post_id</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">service</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;title</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">2&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">)</span>
+    <span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;posts-</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s1">.json&#39;</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">temp_path</span><span class="o">/</span><span class="n">filename</span><span class="p">,</span><span class="n">temp_path</span><span class="o">/</span><span class="s1">&#39;posts2upload&#39;</span><span class="p">)</span>
     <span class="n">posts</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">read_posts_by_author_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
-    <span class="n">service</span><span class="o">.</span><span class="n">upload_posts_from_file</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">directory</span><span class="o">/</span><span class="s1">&#39;posts2upload&#39;</span><span class="p">)</span> <span class="c1"># makes no difference</span>
+    <span class="n">service</span><span class="o">.</span><span class="n">upload_posts_from_file</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">temp_path</span><span class="o">/</span><span class="s1">&#39;posts2upload&#39;</span><span class="p">)</span> <span class="c1"># makes no difference</span>
     <span class="k">assert</span> <span class="n">posts</span><span class="o">==</span><span class="n">service</span><span class="o">.</span><span class="n">read_posts_by_author_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
-    <span class="p">[</span><span class="n">service</span><span class="o">.</span><span class="n">delete_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">posts</span><span class="p">]</span>
-    <span class="n">service</span><span class="o">.</span><span class="n">upload_posts_from_file</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">directory</span><span class="o">/</span><span class="s1">&#39;posts2upload&#39;</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">service</span><span class="o">.</span><span class="n">update_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],[</span><span class="s1">&#39;status&#39;</span><span class="p">],[</span><span class="mi">20</span><span class="p">])</span> <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">posts</span><span class="p">]</span>
+    <span class="n">service</span><span class="o">.</span><span class="n">upload_posts_from_file</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">temp_path</span><span class="o">/</span><span class="s1">&#39;posts2upload&#39;</span><span class="p">)</span>
     <span class="k">assert</span> <span class="p">[]</span><span class="o">==</span><span class="n">service</span><span class="o">.</span><span class="n">read_posts_by_author_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span> <span class="c1"># they are all still deleted</span>
-    <span class="p">(</span><span class="n">directory</span><span class="o">/</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
-    <span class="n">service</span><span class="o">.</span><span class="n">upload_posts_from_file</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">directory</span><span class="o">/</span><span class="s1">&#39;posts2upload&#39;</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">temp_path</span><span class="o">/</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+    <span class="n">service</span><span class="o">.</span><span class="n">upload_posts_from_file</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">temp_path</span><span class="o">/</span><span class="s1">&#39;posts2upload&#39;</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">posts</span><span class="o">==</span><span class="n">service</span><span class="o">.</span><span class="n">read_posts_by_author_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">temp_path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">service</span><span class="o">=</span><span class="n">ServiceFilesystem</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+    <span class="n">user_id</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="s1">&#39;test.user&#39;</span><span class="p">,</span><span class="s1">&#39;badPassword&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">service</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;title</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">)</span>
+    <span class="n">post_id</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">service</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;title</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">2&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">)</span>
+    <span class="n">post</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">read_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;created&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;last_updated&#39;</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">50</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># wait 1s so that last_updated is different</span>
+    <span class="k">assert</span> <span class="n">post</span><span class="o">!=</span><span class="n">service</span><span class="o">.</span><span class="n">update_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">,[</span><span class="s1">&#39;status&#39;</span><span class="p">],[</span><span class="mi">20</span><span class="p">])</span>
+    <span class="n">post</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">read_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">20</span>
+    <span class="k">assert</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;created&#39;</span><span class="p">]</span><span class="o">!=</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;last_updated&#39;</span><span class="p">]</span>
+    <span class="c1"># deleted posts are readable by ID ...</span>
+    <span class="n">expected_post</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">post_id</span><span class="p">,</span><span class="n">author_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="n">body</span><span class="o">=</span><span class="s1">&#39;body&#39;</span><span class="p">,</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;test.user&#39;</span><span class="p">,</span><span class="n">status</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">_compare_post</span><span class="p">(</span><span class="n">expected_post</span><span class="p">,</span><span class="n">service</span><span class="o">.</span><span class="n">read_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">))</span>
+    <span class="c1"># but are not returned when reading all posts by author</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">service</span><span class="o">.</span><span class="n">read_posts_by_author_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">))</span><span class="o">==</span><span class="mi">6</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">temp_path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">service</span><span class="o">=</span><span class="n">ServiceFilesystem</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+    <span class="n">user_id</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="s1">&#39;test.user&#39;</span><span class="p">,</span><span class="s1">&#39;badPassword&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">service</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;title</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">)</span>
+    <span class="n">post_id</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">service</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;title</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">2&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">)</span>
+    <span class="n">post</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">read_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;created&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;last_updated&#39;</span><span class="p">]</span>
+    <span class="n">expected_post</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">post_id</span><span class="p">,</span><span class="n">author_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="n">body</span><span class="o">=</span><span class="s1">&#39;body&#39;</span><span class="p">,</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;test.user&#39;</span><span class="p">,</span><span class="n">status</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">_compare_post</span><span class="p">(</span><span class="n">expected_post</span><span class="p">,</span><span class="n">post</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># wait 1s so that last_updated is different</span>
+    <span class="n">updated_post</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">update_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">,[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">],[</span><span class="s1">&#39;new title&#39;</span><span class="p">,</span><span class="s1">&#39;new-body&#39;</span><span class="p">])</span>
+    <span class="n">expected_post</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;new title&#39;</span>
+    <span class="n">expected_post</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;new-body&#39;</span>
+    <span class="n">post</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">read_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;created&#39;</span><span class="p">]</span><span class="o">!=</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;last_updated&#39;</span><span class="p">]</span>
+    <span class="n">_compare_post</span><span class="p">(</span><span class="n">expected_post</span><span class="p">,</span><span class="n">post</span><span class="p">)</span>    
 <span class="k">finally</span><span class="p">:</span>
     <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
 </pre></div>
@@ -240,7 +453,7 @@ nb_path: "40b_service_filesystem.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="before_request" class="doc_header"><code>before_request</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L111" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>before_request</code>(<strong><code>app</code></strong>)</p>
+<h4 id="before_request" class="doc_header"><code>before_request</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L120" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>before_request</code>(<strong><code>app</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -271,7 +484,7 @@ nb_path: "40b_service_filesystem.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="after_request" class="doc_header"><code>after_request</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L115" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>after_request</code>(<strong><code>app</code></strong>, <strong><code>service</code></strong>)</p>
+<h4 id="after_request" class="doc_header"><code>after_request</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L124" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>after_request</code>(<strong><code>app</code></strong>, <strong><code>service</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -302,7 +515,7 @@ nb_path: "40b_service_filesystem.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="init_service" class="doc_header"><code>init_service</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L119" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>init_service</code>(<strong><code>app</code></strong>)</p>
+<h4 id="init_service" class="doc_header"><code>init_service</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/filesystem.py#L128" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>init_service</code>(<strong><code>app</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -318,44 +531,6 @@ nb_path: "40b_service_filesystem.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nbdev.export</span> <span class="kn">import</span> <span class="n">notebook2script</span>
-<span class="n">notebook2script</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Converted 00_core.ipynb.
-Converted 40a_service_db.ipynb.
-Converted 40b_service_filesystem.ipynb.
-Converted 50_web_app.ipynb.
-Converted 50b_web_auth.ipynb.
-Converted 50c_web_blog.ipynb.
-Converted index.ipynb.
-</pre>
-</div>
-</div>
-
-</div>
-</div>
 
 </div>
     {% endraw %}

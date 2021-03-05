@@ -21,9 +21,10 @@ CREATE TABLE post (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   author_id INTEGER NOT NULL,
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  last_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   title TEXT NOT NULL,
   body TEXT NOT NULL,
-  is_deleted INTEGER NOT NULL DEFAULT 0,
+  status INTEGER NOT NULL DEFAULT 50,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
 """
@@ -58,17 +59,19 @@ class ServiceDb:
 
     def read_posts_by_author_id(self,author_id):
         return self.db.execute(
-            "SELECT p.id, title, body, strftime('%Y-%m-%d %H:%M:%S',created) created, author_id, username, is_deleted"
+            "SELECT p.id, title, body, strftime('%Y-%m-%d %H:%M:%S',created) created, "
+            "       strftime('%Y-%m-%d %H:%M:%S',last_updated) last_updated, author_id, username, status"
             "  FROM post p JOIN user u ON p.author_id = u.id"
             " WHERE u.id = ?"
-            "   AND p.is_deleted = 0"
+            "   AND p.status > 30"
             " ORDER BY created DESC",
             (author_id,)
         ).fetchall()
 
     def read_post_by_id(self,author_id,id):
         return self.db.execute(
-            "SELECT p.id, title, body, strftime('%Y-%m-%d %H:%M:%S',created) created, author_id, username, is_deleted"
+            "SELECT p.id, title, body, strftime('%Y-%m-%d %H:%M:%S',created) created, "
+            "       strftime('%Y-%m-%d %H:%M:%S',last_updated) last_updated, author_id, username, status"
             "  FROM post p JOIN user u ON p.author_id = u.id"
             " WHERE p.author_id = ?"
             "   AND p.id = ?",
@@ -84,21 +87,22 @@ class ServiceDb:
         self.db.commit()
         return cursor.lastrowid
 
-    def update_post_by_id(self,author_id,id,title,body):
+    def update_post_by_id(self,author_id,id,keys,values):
         # TODO: use author_id
         self.db.execute(
-            "UPDATE post SET title = ?, body = ? WHERE id = ?", (title, body, id)
+            'UPDATE post' +
+            '   SET last_updated = CURRENT_TIMESTAMP, ' + ','.join([f'{key}=?' for key in keys]) +
+            ' WHERE id = ?', values + [id]
         )
-        self.db.commit()
-
-    def delete_post_by_id(self,author_id,id):
-        # TODO: use author_id
-        self.db.execute("UPDATE post SET is_deleted = 1 WHERE id = ?", (id,))
         self.db.commit()
 
     def prepare_posts_file_by_author_id(self,author_id):
         # TODO: implement for DB service
         return None,None
+
+    def upload_posts_from_file(self,author_id,file):
+        # TODO: implement for DB service
+        pass
 
 # Cell
 def before_request(app):

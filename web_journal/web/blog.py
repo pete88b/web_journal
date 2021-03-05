@@ -95,7 +95,7 @@ def update(id):
         if error is not None:
             flash(error)
         else:
-            g.service.update_post_by_id(g.user["id"],id,title,body)
+            g.service.update_post_by_id(g.user["id"],id,['title','body'],[title,body])
             return redirect(url_for("blog.index"))
 
     return render_template("blog/update.html", post=post)

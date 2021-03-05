@@ -43,7 +43,7 @@ nb_path: "40a_service_db.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">tempfile</span><span class="o">,</span><span class="nn">shutil</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">tempfile</span><span class="o">,</span><span class="nn">shutil</span><span class="o">,</span><span class="nn">time</span>
 </pre></div>
 
     </div>
@@ -83,7 +83,7 @@ nb_path: "40a_service_db.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ServiceDb" class="doc_header"><code>class</code> <code>ServiceDb</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/db.py#L32" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ServiceDb</code>(<strong><code>database_file</code></strong>)</p>
+<h2 id="ServiceDb" class="doc_header"><code>class</code> <code>ServiceDb</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/db.py#L33" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ServiceDb</code>(<strong><code>database_file</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -142,21 +142,59 @@ nb_path: "40a_service_db.ipynb"
     <span class="n">post_id</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">service</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;title</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">2&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">)</span>
     <span class="c1"># don&#39;t add created to `expected_post` as we don&#39;t know what it&#39;s value will be</span>
-    <span class="n">expected_post</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">post_id</span><span class="p">,</span><span class="n">author_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="n">body</span><span class="o">=</span><span class="s1">&#39;body&#39;</span><span class="p">,</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;test.user&#39;</span><span class="p">,</span><span class="n">is_deleted</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">expected_post</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">post_id</span><span class="p">,</span><span class="n">author_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="n">body</span><span class="o">=</span><span class="s1">&#39;body&#39;</span><span class="p">,</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;test.user&#39;</span><span class="p">,</span><span class="n">status</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
     <span class="n">posts</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">read_posts_by_author_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">posts</span><span class="p">)</span><span class="o">==</span><span class="mi">7</span>
     <span class="n">_compare</span><span class="p">(</span><span class="n">expected_post</span><span class="p">,</span><span class="n">posts</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">posts</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="s1">&#39;created&#39;</span><span class="p">],</span><span class="nb">str</span><span class="p">)</span>
     <span class="n">post</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">read_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">post</span><span class="o">==</span><span class="n">posts</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-    <span class="k">assert</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;is_deleted&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span>
-    <span class="k">assert</span> <span class="n">post</span><span class="o">!=</span><span class="n">service</span><span class="o">.</span><span class="n">delete_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">)</span>
-    <span class="n">expected_post</span><span class="p">[</span><span class="s1">&#39;is_deleted&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+    <span class="k">assert</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">50</span>
+    <span class="k">assert</span> <span class="n">post</span><span class="o">!=</span><span class="n">service</span><span class="o">.</span><span class="n">update_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">,[</span><span class="s1">&#39;status&#39;</span><span class="p">],[</span><span class="mi">20</span><span class="p">])</span>
+    <span class="n">expected_post</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">20</span>
     <span class="c1"># deleted posts are readable by ID ...</span>
     <span class="n">_compare</span><span class="p">(</span><span class="n">expected_post</span><span class="p">,</span><span class="n">service</span><span class="o">.</span><span class="n">read_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">))</span>
     <span class="c1"># but are not returned when reading all posts by author</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">service</span><span class="o">.</span><span class="n">read_posts_by_author_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">))</span><span class="o">==</span><span class="mi">6</span>
     
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">service</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">temp_path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">service</span><span class="o">=</span><span class="n">ServiceDb</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span><span class="o">/</span><span class="s1">&#39;web_journal_test.sqlite&#39;</span><span class="p">)</span>
+    <span class="n">service</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">executescript</span><span class="p">(</span><span class="n">SCHEMA_SQL</span><span class="p">)</span>
+    <span class="n">user_id</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="s1">&#39;test.user&#39;</span><span class="p">,</span><span class="s1">&#39;badPassword&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">service</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;title</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">)</span>
+    <span class="n">post_id</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">service</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;title</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">2&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">)</span>
+    <span class="n">post</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">read_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;created&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;last_updated&#39;</span><span class="p">]</span>
+    <span class="n">expected_post</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">post_id</span><span class="p">,</span><span class="n">author_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="n">body</span><span class="o">=</span><span class="s1">&#39;body&#39;</span><span class="p">,</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;test.user&#39;</span><span class="p">,</span><span class="n">status</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">_compare</span><span class="p">(</span><span class="n">expected_post</span><span class="p">,</span><span class="n">post</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># wait 1s so that last_updated is different</span>
+    <span class="n">updated_post</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">update_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">,[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="s1">&#39;body&#39;</span><span class="p">],[</span><span class="s1">&#39;new title&#39;</span><span class="p">,</span><span class="s1">&#39;new-body&#39;</span><span class="p">])</span>
+    <span class="n">expected_post</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;new title&#39;</span>
+    <span class="n">expected_post</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;new-body&#39;</span>
+    <span class="n">post</span><span class="o">=</span><span class="n">service</span><span class="o">.</span><span class="n">read_post_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">post_id</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">post</span><span class="p">[</span><span class="s1">&#39;created&#39;</span><span class="p">]</span><span class="o">!=</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;last_updated&#39;</span><span class="p">]</span>
+    <span class="n">_compare</span><span class="p">(</span><span class="n">expected_post</span><span class="p">,</span><span class="n">post</span><span class="p">)</span>    
 <span class="k">finally</span><span class="p">:</span>
     <span class="n">service</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
@@ -180,7 +218,7 @@ nb_path: "40a_service_db.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="before_request" class="doc_header"><code>before_request</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/db.py#L104" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>before_request</code>(<strong><code>app</code></strong>)</p>
+<h4 id="before_request" class="doc_header"><code>before_request</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/db.py#L108" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>before_request</code>(<strong><code>app</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -211,7 +249,7 @@ nb_path: "40a_service_db.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="after_request" class="doc_header"><code>after_request</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/db.py#L108" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>after_request</code>(<strong><code>app</code></strong>, <strong><code>service</code></strong>)</p>
+<h4 id="after_request" class="doc_header"><code>after_request</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/db.py#L112" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>after_request</code>(<strong><code>app</code></strong>, <strong><code>service</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -242,7 +280,7 @@ nb_path: "40a_service_db.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="init_service" class="doc_header"><code>init_service</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/db.py#L112" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>init_service</code>(<strong><code>app</code></strong>)</p>
+<h4 id="init_service" class="doc_header"><code>init_service</code><a href="https://github.com/pete88b/web_journal/tree/main/web_journal/service/db.py#L116" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>init_service</code>(<strong><code>app</code></strong>)</p>
 </blockquote>
 
 </div>

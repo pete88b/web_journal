@@ -2,9 +2,11 @@
 > A place to plan and journal. Inspired by coursera learning how to learn.
 
 
-## Install
+## Overview
 
-`pip install ` TODO:
+This project starts with the [Flask basic blog](https://flask.palletsprojects.com/en/1.1.x/tutorial/) and makes it work as a journal for me (o:
+
+At some point, I'll turn this into or create a [solid web app](https://solidproject.org/) but for now ... I need to  learn a few things about python apps with RDBMS and Azure deployments.
 
 # Developers
 
