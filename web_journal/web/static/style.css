@@ -1,18 +1,29 @@
 html {
   font-family: sans-serif;
-  background: rgb(20, 20, 20);
-  padding: 1rem;
+}
+
+@media only screen and (min-width: 768px) {
+  html {
+    background: rgb(50, 50, 50);
+    padding: 1rem;
+  }
+}
+
+@media only screen and (max-height: 500px) {
+  label.optional-label {
+    display: none;
+  }
 }
 
 body {
   max-width: 960px;
   margin: 0 auto;
-  background: black;
+  background: rgb(30, 30, 30);
   color: rgb(201, 201, 201);
 }
 
 body.highlight {
-  background: rgb(193, 212, 193);
+  background: rgb(50, 50, 50);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -31,7 +42,7 @@ a {
 
 hr {
   border: none;
-  border-top: 1px solid lightgray;
+  border-top: 1px solid gray;
 }
 
 nav {
@@ -67,7 +78,7 @@ nav ul li a, nav ul li span, header .action {
 }
 
 .content > header {
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid gray;
   display: flex;
   align-items: flex-end;
 }
@@ -126,16 +137,16 @@ nav ul li a, nav ul li span, header .action {
 
 .content input, .content textarea {
   margin-bottom: 1em;
-  background: rgb(20, 20, 20);
+  background: rgb(30, 30, 30);
   color: rgb(201, 201, 201);
-  border: 1px solid #ccc;
+  border: 1px solid grey;
   border-radius: 4px;
   box-sizing: border-box;
   padding: 0.5em 1em;
 }
 
 .content textarea {
-  min-height: 8em;
+  min-height: 10em;
   resize: vertical;
 }
 
@@ -144,6 +155,7 @@ input.danger {
 }
 
 input[type=submit] {
+  background-color: rgb(50,50,50);
   align-self: start;
   min-width: 10em;
   cursor: pointer;
