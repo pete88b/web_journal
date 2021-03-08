@@ -78,7 +78,7 @@ def create():
     return render_template("blog/create.html")
 
 # Cell
-@bp.route("/<int:id>/update", methods=("GET", "POST"))
+@bp.route("/<id>/update", methods=("GET", "POST"))
 @login_required
 def update(id):
     """Update a post if the current user is the author."""
@@ -101,7 +101,7 @@ def update(id):
     return render_template("blog/update.html", post=post)
 
 # Cell
-@bp.route("/<int:id>/delete", methods=("POST",))
+@bp.route("/<id>/delete", methods=("POST",))
 @login_required
 def delete(id):
     """Delete a post.
