@@ -32,6 +32,8 @@ def migrate(data_dir,output_dir=None):
                 post['last_updated']=post['created']
                 post['status']=50 if post['is_deleted']==0 else 20
                 del post['is_deleted']
+        for post in posts:
+            post['id']=str(post['id'])
         # subsequent migrations might do something like
         # if not 'other_key' in posts[0]: ...
         with open(output_dir/f_name.name,'w') as f: json.dump(posts,f)
