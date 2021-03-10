@@ -3,9 +3,9 @@
 {% block title %}Entries{% endblock %}
 
 {% block content %}
-  <form action="{{ url_for('blog.create') }}" method="post">
-    <input name="title" id="new-post-title" value="{{ request.form['title'] }}" required
-           placeholder="Start with a title to create a new entry" autofocus>
+  <form action="{{ url_for('blog.create') }}" method="post" autocomplete="off">
+    <input name="title" id="new-post-title" value="{{ request.form['title'] }}"
+           placeholder="Start with a title to create a new entry" required autofocus>
     <textarea name="body" id="new-post-body" style="display:none">{{ request.form['body'] }}</textarea>
     <input type="submit" id="new-post-save" value="Save" class="main-submit" style="display:none">
   </form>
@@ -32,5 +32,5 @@
   <div class="content-right">
     <a href="{{ url_for('blog.download') }}" title="Click to download all posts">Download Posts</a>
   </div>
-  <script src="{{ url_for('static', filename='main.js') }}"></script>
+  <script src="{{ url_for('static', filename='blog-index.js') }}"></script>
 {% endblock %}
